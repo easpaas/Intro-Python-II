@@ -8,4 +8,11 @@ class Player:
   def __repr__(self):
     return f"<Player '{self.name}', {self.current_room} >"
 
+  def get_name(self):
+    return self.name
+
+  def get_current_room(self):
+    return self.current_room
+  
+
 
