@@ -33,44 +33,54 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 #
-# Main
+## Main
 #
-
-# Make a new player object that is currently in the 'outside' room.
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
-
-# newPlayer = Player("evan", "outside")
 
 print("Welcome adventurer! \n")
-name = input("What is your name? \n")
-newPlayer = Player(str(name), "outside")
-print(f"Let's get started '{newPlayer.get_name()}'\n") # get players name
 
+# Create a new player and intialize to outside 
+newPlayer = Player(room['outside'])
 
-print("Where would you like to go next?  ")
-move_to = input("Make your selection 'n', 'e', 's', or 'w' \n")
-if move_to == "n": 
-    print(f"you selected north \n")
-elif move_to == "e": 
-    print(f"you selected east \n")
-elif move_to == "s": 
-    print(f"you selected south \n")
-elif move_to == "w":
-    print(f"you selected west \n")
-else: 
-    print(f"No such direction in this game. \n")
+#
+## tries to move the player in the specified direction 
+#
+def try_direction(player, direction):
+    attribute = direction + '_to'
 
+    if hasattr(player.location, attribute):
+        # use getattr to fetch the value associated with the attribute 
+        # update our player's location with the fetched room 
+        player.location = getattr(player.location, attribute)
+    else:
+        print("There's nothing in that direction!")
 
+#
+## Game loop
+# 
+while True:
+    print("\n")
+    print(newPlayer.location)
 
+    # * Waits for user input and decides what to do.
+    first_char = input("\nfirst_char: ").strip().lower().split()
+    first_first_char = first_char[0]
+    first_char = first_first_char[0]
 
-# newPlayer.get_current_room() <- players room
+    # If the user enters "q", quit the game.
+    if first_char == 'q':
+        break
+
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    # strip off everything but the first char 
+    if first_char == 'n':
+        # move to the north
+        try_direction(newPlayer, first_char)
+    elif first_char == 's':
+        # move to the south
+        try_direction(newPlayer, first_char)
+    elif first_char == 'e':
+        # move to the east 
+        try_direction(newPlayer, first_char)
+    elif first_char == 'w':
+        # move to the west 
+        try_direction(newPlayer, first_char)
