@@ -8,5 +8,4 @@ class Player:
   def __repr__(self):
     return f"<Player '{self.name}', {self.current_room} >"
 
-player1 = Player('Evan', 'Outside')
-print(player1)
+

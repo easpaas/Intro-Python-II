@@ -1,4 +1,8 @@
 from room import Room
+from player import Player
+
+player1 = Player('Evan', 'Outside')
+print(player1)
 
 # Declare all the rooms
 room = {

@@ -2,4 +2,12 @@
 # description attributes.
 
 class Room:
-  pass
+  def __init__(self, name, description):
+    self.name = name
+    self.description = description
+
+  def __str__(self):
+    return(f"<Room '{self.name}', '{self.description}'>")
+
+room1 = Room('Dungeon', 'A place to hide many things')
+print(room1)
